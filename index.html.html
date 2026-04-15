@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Çağla Dündar — Technical Product Owner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f11;
+    --surface: #15171a;
+    --card: #1c1e22;
+    --border: #2a2d33;
+    --accent: #4ade80;
+    --accent2: #22d3ee;
+    --text: #f0f0f0;
+    --muted: #8a8f9a;
+    --highlight: #4ade8020;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(14,15,17,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(74,222,128,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 30%, rgba(34,211,238,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0e0f11;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #6ee7a0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74,222,128,0.25);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* HERO RIGHT */
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    animation: fadeSlideIn 0.6s ease both;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateX(6px);
+  }
+
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.2s; }
+  .stat-card:nth-child(3) { animation-delay: 0.3s; }
+  .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .stat-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: var(--highlight);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .stat-info .val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .stat-info .lbl {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* EXPERIENCE */
+  .exp-grid { display: flex; flex-direction: column; gap: 2rem; }
+
+  .exp-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.4rem;
+    position: relative;
+    transition: border-color 0.3s;
+    overflow: hidden;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 3px 0 0 3px;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+  }
+
+  .exp-item:hover::before { transform: scaleY(1); }
+  .exp-item:hover { border-color: rgba(74,222,128,0.3); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 0.2rem;
+  }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .exp-list li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .exp-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.05em;
+  }
+
+  /* PROJECTS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proj-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(74,222,128,0.06), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .proj-card:hover {
+    border-color: rgba(74,222,128,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+  }
+
+  .proj-card:hover::after { opacity: 1; }
+
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .proj-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .proj-desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* SKILLS */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+  }
+
+  .skill-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--highlight);
+  }
+
+  /* CERTIFICATIONS */
+  .cert-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.25s;
+  }
+
+  .cert-item:hover {
+    border-color: rgba(74,222,128,0.35);
+    transform: translateY(-2px);
+  }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .cert-text {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .cert-text strong {
+    color: var(--text);
+    font-weight: 500;
+    display: block;
+    font-size: 0.86rem;
+  }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::before {
+    content: 'B.Sc';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    color: rgba(74,222,128,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.6rem;
+  }
+
+  .edu-meta { font-size: 0.82rem; color: var(--muted); }
+
+  .edu-badge {
+    background: var(--highlight);
+    border: 1px solid rgba(74,222,128,0.3);
+    color: var(--accent);
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .edu-badge .gpa {
+    font-size: 1.5rem;
+    font-family: 'DM Serif Display', serif;
+    display: block;
+    line-height: 1.2;
+  }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+  }
+
+  .lang-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .lang-card:hover {
+    border-color: rgba(74,222,128,0.4);
+    transform: translateY(-3px);
+  }
+
+  .lang-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .lang-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+
+  .contact-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+  .contact-icon { font-size: 0.9rem; width: 20px; text-align: center; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * { animation: heroFadeIn 0.7s ease both; }
+  .hero-left .hero-tag { animation-delay: 0.1s; }
+  .hero-left h1 { animation-delay: 0.2s; }
+  .hero-left .hero-subtitle { animation-delay: 0.3s; }
+  .hero-left .hero-desc { animation-delay: 0.4s; }
+  .hero-left .hero-cta { animation-delay: 0.5s; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 800px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .lang-grid { grid-template-columns: repeat(3, 1fr); }
+    .contact-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Çağla Dündar</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">Technical Product Owner</div>
+    <h1>Çağla<br><span>Dündar</span></h1>
+    <p class="hero-subtitle">Embedded & Software Solutions</p>
+    <p class="hero-desc">
+      Technical Product Owner with a robust background in Software Engineering and hands-on expertise in Embedded Systems, IoT, and EV Charging Infrastructure. Proven track record in bridging complex engineering requirements and business goals through high-level roadmaps, rigorous UAT execution, and API validation.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-info">
+        <div class="val">EV & IoT</div>
+        <div class="lbl">Domain Expertise</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔄</div>
+      <div class="stat-info">
+        <div class="val">Agile / Scrum</div>
+        <div class="lbl">Full Product Lifecycle (SDLC)</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔗</div>
+      <div class="stat-info">
+        <div class="val">RESTful API</div>
+        <div class="lbl">Backend Integration & UAT</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-info">
+        <div class="val">ISO 9001 / IATF</div>
+        <div class="lbl">Quality & Compliance</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="exp-grid">
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Technical Product Owner | Software Engineer</div>
+          <div class="exp-company">Software Development Department — Imecar Electronics</div>
+        </div>
+        <div class="exp-date">2023 — 2026</div>
+      </div>
+      <ul class="exp-list">
+        <li>Analyzed and delivered web-based internal products (office management, calendar & event planning, internal communication); translated business needs into user stories, acceptance criteria, and prioritized backlogs.</li>
+        <li>Collaborated with HR, operations, and management to validate user flows and UX decisions before development and during UAT.</li>
+        <li>Supported frontend (React.js) and backend (RESTful APIs) teams; designed and validated API contracts using Postman (GET, POST, PUT, DELETE).</li>
+        <li>Led end-to-end validation and final acceptance testing (FAT) for EV charging stations, ensuring 100% compliance with technical specifications and safety standards before deployment.</li>
+        <li>Collaborated with embedded and software teams to resolve critical firmware bugs identified during validation, acting as the final decision-maker for release readiness.</li>
+        <li>Contributed to backend integration of 30+ IP-based face recognition devices, supporting logging, monitoring, data management, and CRUD operations.</li>
+        <li>Supported process improvement and audit readiness (ISO 9001, IATF 16949) by defining KPIs, risks, and reflecting insights into backlog priorities.</li>
+        <li>Actively participated in Agile/Scrum ceremonies using Jira (sprint planning, backlog refinement, demos, retrospectives, UAT coordination), acting as technical bridge between teams and stakeholders.</li>
+        <li>Created and executed test scenarios and test cases to validate business requirements, system behavior, and API integrations prior to UAT.</li>
+        <li>Collaborated in English with international team members, contributing to technical discussions, requirement clarification, and written communication.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="proj-grid">
+    <div class="proj-card">
+      <span class="proj-tag">IoT · OTA · Embedded</span>
+      <div class="proj-title">Smart EV Charging Station OTA & Device Management Platform</div>
+      <p class="proj-desc">Analyzed business and operational requirements and translated them into user stories and acceptance criteria for a remote firmware update (OTA) solution. Managed backlog priorities and acted as a technical bridge between embedded, backend, and operations teams. Supported testing, validation, and release readiness, defining KPIs to track system reliability and deployment success.</p>
+    </div>
+    <div class="proj-card">
+      <span class="proj-tag">Web App · HR · Agile</span>
+      <div class="proj-title">Internal Web-Based Office Management Platform</div>
+      <p class="proj-desc">Gathered and analyzed requirements from HR and management, converted them into user stories, and supported sprint planning and UAT processes. Collaborated closely with software teams to ensure functional correctness and alignment with business needs across all modules.</p>
+    </div>
+    <div class="proj-card">
+      <span class="proj-tag">Backend · API · IP Camera</span>
+      <div class="proj-title">Backend Integration & Monitoring System for IP Camera Networks</div>
+      <p class="proj-desc">Analyzed integration needs and supported the development of a backend monitoring platform, including logging, APIs, and CRUD operations. Performed API-level testing and validation to ensure system stability and scalability across 30+ connected devices.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-container">
+    <div class="skill-group">
+      <div class="skill-group-title">Product & Project Management</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Product Ownership</span>
+        <span class="skill-tag">Scrum</span>
+        <span class="skill-tag">Agile</span>
+        <span class="skill-tag">Backlog Management</span>
+        <span class="skill-tag">Sprint Planning & Prioritization</span>
+        <span class="skill-tag">User Story Writing</span>
+        <span class="skill-tag">Acceptance Criteria</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Customer Awareness</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Agile & Delivery Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">OpenProject</span>
+        <span class="skill-tag">Azure DevOps</span>
+        <span class="skill-tag">Postman</span>
+        <span class="skill-tag">UAT Tracking</span>
+        <span class="skill-tag">Task Management</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Web & API</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">RESTful API Design</span>
+        <span class="skill-tag">Backend Integration</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">PostgreSQL</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Embedded & IoT</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Embedded Systems</span>
+        <span class="skill-tag">IoT Awareness</span>
+        <span class="skill-tag">BMS & Charging Systems</span>
+        <span class="skill-tag">Device Integration</span>
+        <span class="skill-tag">HW-SW Interaction</span>
+        <span class="skill-tag">Fault Analysis</span>
+        <span class="skill-tag">System-Level Testing</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Quality & Compliance</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ISO 9001</span>
+        <span class="skill-tag">ISO 14001</span>
+        <span class="skill-tag">ISO 45001</span>
+        <span class="skill-tag">IATF 16949</span>
+        <span class="skill-tag">Internal Auditor (ISO 19011)</span>
+        <span class="skill-tag">APQP</span>
+        <span class="skill-tag">PPAP</span>
+        <span class="skill-tag">FMEA</span>
+        <span class="skill-tag">SPC</span>
+        <span class="skill-tag">MSA</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">AI & Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">RPA (UiPath Academy)</span>
+        <span class="skill-tag">Python for ML</span>
+        <span class="skill-tag">Deep Learning (NVIDIA)</span>
+        <span class="skill-tag">Data-Driven Product</span>
+        <span class="skill-tag">AI Foundational</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="cert-list">
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Product Ownership & Scrum</strong>
+        BTK Academy
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Agile Project Management</strong>
+        BTK Academy
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Customer Awareness & Stakeholder Management</strong>
+        BTK Academy
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>RPA Developer Foundation</strong>
+        UiPath Academy
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Python for Machine Learning</strong>
+        Global AI Hub
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Deep Learning: Getting Started</strong>
+        NVIDIA
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Integrated Management Systems</strong>
+        ISO 9001, 14001, 45001 — Bureau Veritas
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Internal Auditor (ISO 19011)</strong>
+        Bureau Veritas
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>IATF 16949:2016 Internal Auditor</strong>
+        Quality Compliance
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>APQP, PPAP, FMEA, SPC, MSA</strong>
+        Quality Partner
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-card">
+    <div>
+      <div class="edu-degree">Bachelor of Electrical & Electronics Engineering</div>
+      <div class="edu-school">Antalya Bilim University</div>
+      <div class="edu-meta">2018 — 2023 &nbsp;·&nbsp; 100% English &nbsp;·&nbsp; Graduated with Second Highest Honors</div>
+    </div>
+    <div class="edu-badge">
+      <span class="gpa">3.33</span>
+      GPA / 4.0
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section>
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Languages</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-name">Turkish</div>
+      <div class="lang-level">Native</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">English</div>
+      <div class="lang-level">C1 · Professional</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">German</div>
+      <div class="lang-level">A1.2 · Improving</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-inner">
+    <div>
+      <p style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text); margin-bottom:0.5rem;">Let's work together.</p>
+      <p style="font-size:0.9rem; color:var(--muted); max-width:400px;">I'm always open to new opportunities, collaborations, and technical projects. Feel free to reach out — I'd love to hear from you.</p>
+    </div>
+    <div class="contact-info">
+      <a href="tel:+905079153112" class="contact-item">
+        <span class="contact-icon">📞</span>
+        +90 507 915 31 12
+      </a>
+      <a href="mailto:cagladundar.eee@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
+        cagladundar.eee@gmail.com
+      </a>
+      <span class="contact-item">
+        <span class="contact-icon">📍</span>
+        Antalya / Türkiye &nbsp;<span style="color:var(--accent);font-size:0.75rem;">(Open to relocation)</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Çağla Dündar &nbsp;·&nbsp; Technical Product Owner &nbsp;·&nbsp; Embedded & Software Solutions
+</footer>
+
+</body>
+</html>
