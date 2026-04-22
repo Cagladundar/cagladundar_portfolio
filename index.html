@@ -4,721 +4,696 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Çağla Dündar — Technical Product Owner</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #f4f1ec;
-  --surface:  #faf8f5;
-  --card:     #ffffff;
-  --border:   #e2ddd6;
-  --border2:  #cfc9c0;
-
-  --accent:   #7c6a52;   /* warm walnut */
-  --accent2:  #a0896e;   /* lighter tan */
-  --pop:      #2d5a6b;   /* muted teal for contrast */
-  --pop-soft: rgba(45,90,107,0.08);
-
-  --text:     #1c1917;
-  --muted:    #78716c;
-  --faint:    #a8a29e;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Outfit', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-/* Subtle grain overlay */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9999; opacity: 0.7;
-}
-
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.1rem 5rem;
-  background: rgba(244,241,236,0.88);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-}
-
-.nav-links { display: flex; gap: 2.8rem; list-style: none; }
-.nav-links a {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  text-decoration: none;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--pop); }
-
-/* ─── HERO ─── */
-#hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  padding: 8rem 5rem 5rem;
-  gap: 5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-ornament {
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 520px; height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(45,90,107,0.06) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.hero-ornament2 {
-  position: absolute;
-  bottom: -100px; left: 10%;
-  width: 380px; height: 380px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124,106,82,0.07) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.hero-rule {
-  width: 48px; height: 1px;
-  background: var(--accent);
-  margin-bottom: 1.6rem;
-  animation: expandLine 0.8s ease both 0.1s;
-}
-
-@keyframes expandLine {
-  from { width: 0; opacity: 0; }
-  to { width: 48px; opacity: 1; }
-}
-
-.hero-eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--pop);
-  margin-bottom: 1rem;
-  animation: fadeUp 0.7s ease both 0.2s;
-}
-
-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.2rem, 5.5vw, 5rem);
-  font-weight: 300;
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  margin-bottom: 1.4rem;
-  animation: fadeUp 0.7s ease both 0.3s;
-}
-
-h1 em {
-  font-style: italic;
-  color: var(--accent);
-  font-weight: 300;
-}
-
-.hero-desc {
-  font-size: 0.92rem;
-  color: var(--muted);
-  max-width: 500px;
-  line-height: 1.85;
-  margin-bottom: 2.8rem;
-  font-weight: 300;
-  animation: fadeUp 0.7s ease both 0.4s;
-}
-
-.hero-cta {
-  display: flex; gap: 1rem; flex-wrap: wrap;
-  animation: fadeUp 0.7s ease both 0.5s;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.btn {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.8rem 2rem;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 2px;
-  transition: all 0.25s;
-  cursor: pointer; border: none;
-}
-
-.btn-primary {
-  background: var(--pop);
-  color: #fff;
-}
-.btn-primary:hover {
-  background: #234a59;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(45,90,107,0.22);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border2);
-}
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* Right side cards */
-.hero-right {
-  display: flex; flex-direction: column; gap: 1rem;
-  animation: fadeUp 0.8s ease both 0.5s;
-}
-
-.kpi-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 1.4rem 1.8rem;
-  display: flex; align-items: center; gap: 1.4rem;
-  transition: all 0.3s;
-  position: relative; overflow: hidden;
-}
-
-.kpi-card::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px;
-  background: var(--pop);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.kpi-card:hover { transform: translateX(5px); border-color: var(--border2); }
-.kpi-card:hover::before { opacity: 1; }
-
-.kpi-icon {
-  font-size: 1.1rem; width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--pop-soft);
-  border-radius: 4px; flex-shrink: 0;
-}
-
-.kpi-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text); line-height: 1.2;
-}
-
-.kpi-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--faint);
-  letter-spacing: 0.06em;
-  margin-top: 0.1rem;
-}
-
-/* ─── SECTIONS ─── */
-section {
-  padding: 7rem 5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-header {
-  display: flex; align-items: baseline; gap: 1.5rem;
-  margin-bottom: 4rem;
-}
-
-.section-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--faint);
-  letter-spacing: 0.12em;
-}
-
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem;
-  font-weight: 400;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
-.section-rule {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
-  margin-bottom: 4px;
-}
-
-/* ─── NARRATIVE BANNER ─── */
-.narrative-banner {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--pop);
-  border-radius: 4px;
-  padding: 2.2rem 2.8rem;
-  margin-bottom: 2.5rem;
-}
-
-.narrative-banner p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.18rem;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--text);
-  line-height: 1.75;
-}
-
-.narrative-banner p strong {
-  font-style: normal;
-  font-weight: 600;
-  color: var(--pop);
-}
-
-/* ─── EXPERIENCE ─── */
-.exp-grid { display: flex; flex-direction: column; gap: 2.2rem; }
-
-.exp-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2.2rem 2.6rem;
-  position: relative;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.exp-item:hover {
-  border-color: var(--border2);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-}
-
-.exp-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.6rem;
-}
-
-.exp-role {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.exp-company {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--accent2);
-  letter-spacing: 0.04em;
-  margin-top: 0.25rem;
-}
-
-.exp-date {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--muted);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 0.3rem 0.9rem;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-
-/* Phase badges inside experience */
-.phase-row {
-  display: flex; gap: 0.6rem; flex-wrap: wrap;
-  margin-bottom: 1.2rem;
-}
-
-.phase-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.7rem;
-  border-radius: 2px;
-}
-
-.phase-badge.soft { background: rgba(45,90,107,0.1); color: var(--pop); }
-.phase-badge.emb  { background: rgba(124,106,82,0.12); color: var(--accent); }
-.phase-badge.po   { background: rgba(45,90,107,0.06); color: var(--pop); border: 1px solid rgba(45,90,107,0.2); }
-
-.exp-list {
-  list-style: none;
-  display: flex; flex-direction: column; gap: 0.6rem;
-}
-
-.exp-list li {
-  font-size: 0.88rem;
-  color: var(--muted);
-  padding-left: 1.4rem;
-  position: relative;
-  line-height: 1.7;
-}
-
-.exp-list li::before {
-  content: '—';
-  position: absolute; left: 0;
-  color: var(--faint);
-  font-size: 0.8rem;
-}
-
-.exp-list li strong {
-  color: var(--text);
-  font-weight: 500;
-}
-
-/* Phase divider inside card */
-.phase-section { margin-top: 1.4rem; }
-.phase-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 0.7rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ─── PROJECTS ─── */
-.proj-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-.proj-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2rem 2.2rem;
-  transition: all 0.3s;
-  position: relative;
-}
-
-.proj-card:hover {
-  border-color: var(--border2);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.06);
-}
-
-.proj-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--pop);
-  margin-bottom: 0.9rem;
-  display: block;
-}
-
-.proj-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.9rem;
-  line-height: 1.35;
-}
-
-.proj-desc {
-  font-size: 0.84rem;
-  color: var(--muted);
-  line-height: 1.75;
-  font-weight: 300;
-}
-
-/* ─── SKILLS ─── */
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 1.4rem;
-}
-
-.skill-group {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 1.8rem 2rem;
-}
-
-.skill-group.featured {
-  border-color: var(--border2);
-  background: linear-gradient(135deg, #fff 0%, rgba(45,90,107,0.03) 100%);
-}
-
-.skill-group-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--pop);
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-.skill-tag {
-  font-size: 0.78rem;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 0.28rem 0.75rem;
-  border-radius: 2px;
-  transition: all 0.2s;
-  font-weight: 300;
-}
-
-.skill-tag:hover {
-  border-color: var(--accent2);
-  color: var(--accent);
-  background: rgba(124,106,82,0.06);
-}
-
-.skill-tag.highlight {
-  background: var(--pop-soft);
-  border-color: rgba(45,90,107,0.2);
-  color: var(--pop);
-}
-
-/* ─── CERTIFICATIONS ─── */
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1rem;
-}
-
-.cert-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 1.3rem 1.6rem;
-  display: flex; align-items: flex-start; gap: 1rem;
-  transition: all 0.25s;
-}
-
-.cert-item:hover {
-  border-color: var(--border2);
-  transform: translateY(-2px);
-}
-
-.cert-dash {
-  width: 16px; height: 1px;
-  background: var(--pop);
-  flex-shrink: 0; margin-top: 0.65rem;
-}
-
-.cert-name {
-  font-size: 0.85rem;
-  color: var(--text);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.cert-org {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--faint);
-  letter-spacing: 0.04em;
-  margin-top: 0.25rem;
-}
-
-/* ─── EDUCATION ─── */
-.edu-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2.4rem 2.8rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  position: relative; overflow: hidden;
-}
-
-.edu-watermark {
-  position: absolute;
-  right: 2.5rem; top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 7rem; font-weight: 300;
-  color: rgba(45,90,107,0.04);
-  pointer-events: none; line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.edu-degree {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem; font-weight: 600;
-  color: var(--text); margin-bottom: 0.4rem;
-}
-
-.edu-school {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--pop);
-  letter-spacing: 0.04em;
-  margin-bottom: 0.6rem;
-}
-
-.edu-meta {
-  font-size: 0.82rem; color: var(--muted); font-weight: 300;
-}
-
-.gpa-badge {
-  text-align: center;
-  background: rgba(45,90,107,0.06);
-  border: 1px solid rgba(45,90,107,0.15);
-  border-radius: 4px;
-  padding: 1rem 1.6rem;
-}
-
-.gpa-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem; font-weight: 300;
-  color: var(--pop); display: block; line-height: 1.1;
-}
-
-.gpa-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem; color: var(--faint);
-  letter-spacing: 0.08em;
-}
-
-/* ─── LANGUAGES ─── */
-.lang-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem; max-width: 560px;
-}
-
-.lang-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 1.6rem;
-  text-align: center;
-  transition: all 0.25s;
-}
-
-.lang-card:hover {
-  border-color: var(--border2);
-  transform: translateY(-3px);
-}
-
-.lang-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem; font-weight: 600;
-  color: var(--text); margin-bottom: 0.3rem;
-}
-
-.lang-level {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--faint); letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* ─── CONTACT ─── */
-.contact-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-}
-
-.contact-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem; font-weight: 300;
-  line-height: 1.2; color: var(--text);
-  margin-bottom: 0.8rem;
-}
-
-.contact-sub {
-  font-size: 0.88rem; color: var(--muted); font-weight: 300; line-height: 1.8;
-}
-
-.contact-list { display: flex; flex-direction: column; gap: 1rem; }
-
-.contact-link {
-  display: flex; align-items: center; gap: 1rem;
-  text-decoration: none;
-  color: var(--muted); font-size: 0.88rem;
-  padding: 1rem 1.4rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: all 0.25s;
-}
-
-.contact-link:hover {
-  border-color: var(--pop);
-  color: var(--pop);
-  transform: translateX(4px);
-}
-
-.contact-link-icon {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--faint); min-width: 32px;
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--faint);
-  border-top: 1px solid var(--border);
-  letter-spacing: 0.1em;
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-/* RESPONSIVE */
-@media (max-width: 860px) {
-  nav { padding: 1rem 1.5rem; }
-  .nav-links { display: none; }
-  #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
-  .hero-right { display: none; }
-  section { padding: 4rem 1.5rem; }
-  .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
-  .lang-grid { grid-template-columns: repeat(3, 1fr); }
-}
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --border: #e6e8ec;
+
+  --accent: #6366f1;   /* soft indigo */
+  --accent2: #06b6d4;  /* cyan ama daha sakin */
+
+  --text: #111827;
+  --muted: #6b7280;
+  --highlight: rgba(99,102,241,0.08);
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(74,222,128,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 30%, rgba(34,211,238,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0e0f11;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #6ee7a0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74,222,128,0.25);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* HERO RIGHT */
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    animation: fadeSlideIn 0.6s ease both;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateX(6px);
+  }
+
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.2s; }
+  .stat-card:nth-child(3) { animation-delay: 0.3s; }
+  .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .stat-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: var(--highlight);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .stat-info .val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .stat-info .lbl {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* EXPERIENCE */
+  .exp-grid { display: flex; flex-direction: column; gap: 2rem; }
+
+  .exp-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.4rem;
+    position: relative;
+    transition: border-color 0.3s;
+    overflow: hidden;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 3px 0 0 3px;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+  }
+
+  .exp-item:hover::before { transform: scaleY(1); }
+  .exp-item:hover { border-color: rgba(74,222,128,0.3); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 0.2rem;
+  }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .exp-list li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .exp-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.05em;
+  }
+
+  /* PROJECTS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proj-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(74,222,128,0.06), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .proj-card:hover {
+    border-color: rgba(74,222,128,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+  }
+
+  .proj-card:hover::after { opacity: 1; }
+
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .proj-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .proj-desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* SKILLS */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+  }
+
+  .skill-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--highlight);
+  }
+
+  /* CERTIFICATIONS */
+  .cert-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.25s;
+  }
+
+  .cert-item:hover {
+    border-color: rgba(74,222,128,0.35);
+    transform: translateY(-2px);
+  }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .cert-text {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .cert-text strong {
+    color: var(--text);
+    font-weight: 500;
+    display: block;
+    font-size: 0.86rem;
+  }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::before {
+    content: 'B.Sc';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    color: rgba(74,222,128,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.6rem;
+  }
+
+  .edu-meta { font-size: 0.82rem; color: var(--muted); }
+
+  .edu-badge {
+    background: var(--highlight);
+    border: 1px solid rgba(74,222,128,0.3);
+    color: var(--accent);
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .edu-badge .gpa {
+    font-size: 1.5rem;
+    font-family: 'DM Serif Display', serif;
+    display: block;
+    line-height: 1.2;
+  }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+  }
+
+  .lang-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .lang-card:hover {
+    border-color: rgba(74,222,128,0.4);
+    transform: translateY(-3px);
+  }
+
+  .lang-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .lang-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+
+  .contact-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+  .contact-icon { font-size: 0.9rem; width: 20px; text-align: center; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * { animation: heroFadeIn 0.7s ease both; }
+  .hero-left .hero-tag { animation-delay: 0.1s; }
+  .hero-left h1 { animation-delay: 0.2s; }
+  .hero-left .hero-subtitle { animation-delay: 0.3s; }
+  .hero-left .hero-desc { animation-delay: 0.4s; }
+  .hero-left .hero-cta { animation-delay: 0.5s; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 800px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .lang-grid { grid-template-columns: repeat(3, 1fr); }
+    .contact-inner { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
@@ -738,49 +713,49 @@ footer {
 
 <!-- HERO -->
 <div id="hero">
-  <div class="hero-ornament"></div>
-  <div class="hero-ornament2"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
 
   <div class="hero-left">
-    <div class="hero-rule"></div>
-    <div class="hero-eyebrow">Technical Product Owner · Embedded & Software</div>
-    <h1>Çağla<br><em>Dündar</em></h1>
+    <div class="hero-tag">Technical Product Owner</div>
+    <h1>Çağla<br><span>Dündar</span></h1>
+    <p class="hero-subtitle">Embedded & Software Solutions</p>
     <p class="hero-desc">
-      Software engineer turned Product Owner — with hands-on experience across embedded systems, IoT, and web products. I translate technical complexity into clear roadmaps, and bridge the gap between engineering teams and business goals through rigorous backlog ownership, API validation, and stakeholder alignment.
+      Technical Product Owner with a robust background in Software Engineering and hands-on expertise in Embedded Systems, IoT, and EV Charging Infrastructure. Proven track record in bridging complex engineering requirements and business goals through high-level roadmaps, rigorous UAT execution, and API validation.
     </p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-primary">Get in Touch</a>
-      <a href="#experience" class="btn btn-outline">View Experience</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
     </div>
   </div>
 
   <div class="hero-right">
-    <div class="kpi-card">
-      <div class="kpi-icon">⚡</div>
-      <div>
-        <div class="kpi-val">EV Charging & IoT</div>
-        <div class="kpi-lbl">Domain Expertise</div>
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-info">
+        <div class="val">EV & IoT</div>
+        <div class="lbl">Domain Expertise</div>
       </div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">🧩</div>
-      <div>
-        <div class="kpi-val">Software → Embedded → PO</div>
-        <div class="kpi-lbl">Full-Stack Technical Background</div>
+    <div class="stat-card">
+      <div class="stat-icon">🔄</div>
+      <div class="stat-info">
+        <div class="val">Agile / Scrum</div>
+        <div class="lbl">Full Product Lifecycle (SDLC)</div>
       </div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">🔗</div>
-      <div>
-        <div class="kpi-val">RESTful API & UAT</div>
-        <div class="kpi-lbl">End-to-End Validation</div>
+    <div class="stat-card">
+      <div class="stat-icon">🔗</div>
+      <div class="stat-info">
+        <div class="val">RESTful API</div>
+        <div class="lbl">Backend Integration & UAT</div>
       </div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">📋</div>
-      <div>
-        <div class="kpi-val">ISO 9001 · IATF</div>
-        <div class="kpi-lbl">Quality & Compliance Certified</div>
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-info">
+        <div class="val">ISO 9001 / IATF</div>
+        <div class="lbl">Quality & Compliance</div>
       </div>
     </div>
   </div>
@@ -791,81 +766,29 @@ footer {
   <div class="section-header">
     <span class="section-num">01</span>
     <h2 class="section-title">Experience</h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <!-- Narrative framing -->
-  <div class="narrative-banner">
-    <p>
-      My path from <strong>software engineering</strong> through <strong>embedded systems</strong> to <strong>Product Ownership</strong> is a deliberate progression — each phase deepened my understanding of the full product stack, making me a PO who can challenge, unblock, and align technical teams with real conviction.
-    </p>
+    <div class="section-line"></div>
   </div>
 
   <div class="exp-grid">
     <div class="exp-item">
       <div class="exp-header">
         <div>
-          <div class="exp-role">Technical Product Owner</div>
+          <div class="exp-role">Technical Product Owner | Software Engineer</div>
           <div class="exp-company">Software Development Department — Imecar Electronics</div>
         </div>
-        <div class="exp-date">2024 — 2026</div>
-      </div>
-      <div class="phase-row">
-        <span class="phase-badge po">Product Ownership</span>
-        <span class="phase-badge po">Agile / Scrum</span>
-        <span class="phase-badge po">Stakeholder Management</span>
+        <div class="exp-date">2023 — 2026</div>
       </div>
       <ul class="exp-list">
-        <li>Owned the product backlog for three internal web platforms (office management, HR calendar, internal communications) — translated business needs into user stories and acceptance criteria, prioritized delivery with stakeholders across HR, ops, and management.</li>
-        <li>Acted as <strong>technical bridge</strong> between frontend (React.js) and backend teams; designed and validated API contracts via Postman (GET, POST, PUT, DELETE), reducing ambiguity in sprint kickoffs.</li>
-        <li>Led end-to-end final acceptance testing (FAT) for EV charging stations — <strong>sole decision-maker for release readiness</strong>, ensuring 100% compliance with technical specs and safety standards before deployment.</li>
-        <li>Collaborated with embedded and software teams to triage and resolve critical firmware bugs discovered during validation; improved cross-team resolution speed by owning the escalation path.</li>
-        <li>Defined KPIs, risk indicators, and quality checkpoints aligned with ISO 9001 / IATF 16949 audit cycles — reflected insights directly into backlog priorities.</li>
-        <li>Facilitated all Agile ceremonies (sprint planning, backlog refinement, demos, retrospectives, UAT coordination) in Jira; maintained delivery rhythm across multi-discipline teams.</li>
-        <li>Collaborated in English with international team members on requirement clarification, technical documentation, and written communication.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Embedded Systems Engineer</div>
-          <div class="exp-company">Embedded Software Department — Imecar Electronics</div>
-        </div>
-        <div class="exp-date">2023 — 2024</div>
-      </div>
-      <div class="phase-row">
-        <span class="phase-badge emb">Embedded Systems</span>
-        <span class="phase-badge emb">IoT</span>
-        <span class="phase-badge emb">EV Charging</span>
-        <span class="phase-badge emb">BMS</span>
-      </div>
-      <ul class="exp-list">
-        <li>Contributed to firmware development and validation for EV charging station hardware; gained deep understanding of hardware-software interaction, charging protocols, and fault analysis.</li>
-        <li>Supported backend integration of 30+ IP-based face recognition devices — logging, monitoring, data management, and CRUD operations across a networked device ecosystem.</li>
-        <li>Developed practical knowledge of BMS (Battery Management Systems), device integration workflows, and system-level testing methodologies.</li>
-        <li>This phase directly shaped my product instincts: <strong>understanding the embedded constraints upstream makes backlog decisions downstream far more effective.</strong></li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Software Engineer (Web & Fullstack)</div>
-          <div class="exp-company">Software Development Department — Imecar Electronics</div>
-        </div>
-        <div class="exp-date">2023 · 6 months</div>
-      </div>
-      <div class="phase-row">
-        <span class="phase-badge soft">React.js</span>
-        <span class="phase-badge soft">Node.js</span>
-        <span class="phase-badge soft">REST API</span>
-        <span class="phase-badge soft">PostgreSQL</span>
-      </div>
-      <ul class="exp-list">
-        <li>Built and maintained web application features using React.js on the frontend and Node.js / RESTful APIs on the backend.</li>
-        <li>Worked directly with PostgreSQL for data management; contributed to architecture discussions around API design and data flows.</li>
-        <li>This hands-on development foundation now allows me as PO to <strong>write precise acceptance criteria, spot technical debt in estimates, and facilitate productive engineering conversations</strong> without relying solely on what teams tell me.</li>
+        <li>Analyzed and delivered web-based internal products (office management, calendar & event planning, internal communication); translated business needs into user stories, acceptance criteria, and prioritized backlogs.</li>
+        <li>Collaborated with HR, operations, and management to validate user flows and UX decisions before development and during UAT.</li>
+        <li>Supported frontend (React.js) and backend (RESTful APIs) teams; designed and validated API contracts using Postman (GET, POST, PUT, DELETE).</li>
+        <li>Led end-to-end validation and final acceptance testing (FAT) for EV charging stations, ensuring 100% compliance with technical specifications and safety standards before deployment.</li>
+        <li>Collaborated with embedded and software teams to resolve critical firmware bugs identified during validation, acting as the final decision-maker for release readiness.</li>
+        <li>Contributed to backend integration of 30+ IP-based face recognition devices, supporting logging, monitoring, data management, and CRUD operations.</li>
+        <li>Supported process improvement and audit readiness (ISO 9001, IATF 16949) by defining KPIs, risks, and reflecting insights into backlog priorities.</li>
+        <li>Actively participated in Agile/Scrum ceremonies using Jira (sprint planning, backlog refinement, demos, retrospectives, UAT coordination), acting as technical bridge between teams and stakeholders.</li>
+        <li>Created and executed test scenarios and test cases to validate business requirements, system behavior, and API integrations prior to UAT.</li>
+        <li>Collaborated in English with international team members, contributing to technical discussions, requirement clarification, and written communication.</li>
       </ul>
     </div>
   </div>
@@ -876,24 +799,24 @@ footer {
   <div class="section-header">
     <span class="section-num">02</span>
     <h2 class="section-title">Projects</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
   <div class="proj-grid">
     <div class="proj-card">
-      <span class="proj-tag">IoT · OTA · Embedded · PO</span>
+      <span class="proj-tag">IoT · OTA · Embedded</span>
       <div class="proj-title">Smart EV Charging Station OTA & Device Management Platform</div>
-      <p class="proj-desc">Translated operational requirements into a backlog for remote firmware OTA updates, acting as bridge between embedded, backend, and operations. Managed prioritization, defined KPIs for deployment success and system reliability, and owned release readiness decisions. My embedded background allowed me to challenge estimates and understand real constraints.</p>
+      <p class="proj-desc">Analyzed business and operational requirements and translated them into user stories and acceptance criteria for a remote firmware update (OTA) solution. Managed backlog priorities and acted as a technical bridge between embedded, backend, and operations teams. Supported testing, validation, and release readiness, defining KPIs to track system reliability and deployment success.</p>
     </div>
     <div class="proj-card">
-      <span class="proj-tag">Web App · HR · Agile · PO</span>
+      <span class="proj-tag">Web App · HR · Agile</span>
       <div class="proj-title">Internal Web-Based Office Management Platform</div>
-      <p class="proj-desc">Led requirement gathering with HR and management, converted needs into user stories with clear acceptance criteria, and coordinated UAT processes. Maintained backlog health across multiple modules and acted as the final arbiter of go/no-go decisions before each release cycle.</p>
+      <p class="proj-desc">Gathered and analyzed requirements from HR and management, converted them into user stories, and supported sprint planning and UAT processes. Collaborated closely with software teams to ensure functional correctness and alignment with business needs across all modules.</p>
     </div>
     <div class="proj-card">
-      <span class="proj-tag">Backend · API · IP Camera · Integration</span>
-      <div class="proj-title">Backend Integration & Monitoring System for 30+ IP Camera Network</div>
-      <p class="proj-desc">Analyzed integration architecture and supported development of a backend monitoring platform covering logging, real-time APIs, and CRUD operations across 30+ devices. Executed API-level testing and validation to ensure system scalability and stability, contributing both as a developer and later as a QA-oriented PO.</p>
+      <span class="proj-tag">Backend · API · IP Camera</span>
+      <div class="proj-title">Backend Integration & Monitoring System for IP Camera Networks</div>
+      <p class="proj-desc">Analyzed integration needs and supported the development of a backend monitoring platform, including logging, APIs, and CRUD operations. Performed API-level testing and validation to ensure system stability and scalability across 30+ connected devices.</p>
     </div>
   </div>
 </section>
@@ -903,49 +826,50 @@ footer {
   <div class="section-header">
     <span class="section-num">03</span>
     <h2 class="section-title">Skills</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
   <div class="skills-container">
-    <div class="skill-group featured">
-      <div class="skill-group-title">Product & Agile (Core)</div>
+    <div class="skill-group">
+      <div class="skill-group-title">Product & Project Management</div>
       <div class="skill-tags">
-        <span class="skill-tag highlight">Product Ownership</span>
-        <span class="skill-tag highlight">Backlog Management</span>
-        <span class="skill-tag highlight">User Story Writing</span>
-        <span class="skill-tag highlight">Acceptance Criteria</span>
-        <span class="skill-tag highlight">Sprint Planning</span>
-        <span class="skill-tag highlight">Scrum</span>
-        <span class="skill-tag highlight">Stakeholder Management</span>
-        <span class="skill-tag highlight">UAT Coordination</span>
-        <span class="skill-tag">Roadmapping</span>
-        <span class="skill-tag">Release Management</span>
+        <span class="skill-tag">Product Ownership</span>
+        <span class="skill-tag">Scrum</span>
+        <span class="skill-tag">Agile</span>
+        <span class="skill-tag">Backlog Management</span>
+        <span class="skill-tag">Sprint Planning & Prioritization</span>
+        <span class="skill-tag">User Story Writing</span>
+        <span class="skill-tag">Acceptance Criteria</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Customer Awareness</span>
       </div>
     </div>
 
     <div class="skill-group">
-      <div class="skill-group-title">Delivery & Tooling</div>
+      <div class="skill-group-title">Agile & Delivery Tools</div>
       <div class="skill-tags">
         <span class="skill-tag">Jira</span>
-        <span class="skill-tag">Azure DevOps</span>
         <span class="skill-tag">OpenProject</span>
+        <span class="skill-tag">Azure DevOps</span>
         <span class="skill-tag">Postman</span>
-        <span class="skill-tag">Confluence</span>
-        <span class="skill-tag">Test Case Management</span>
+        <span class="skill-tag">UAT Tracking</span>
+        <span class="skill-tag">Task Management</span>
       </div>
     </div>
 
     <div class="skill-group">
-      <div class="skill-group-title">Technical (Web & API)</div>
+      <div class="skill-group-title">Web & API</div>
       <div class="skill-tags">
-        <span class="skill-tag">RESTful API Design</span>
-        <span class="skill-tag">React.js</span>
-        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
         <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">RESTful API Design</span>
+        <span class="skill-tag">Backend Integration</span>
+        <span class="skill-tag">Node.js</span>
         <span class="skill-tag">Python</span>
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">HTML / CSS</span>
         <span class="skill-tag">C</span>
+        <span class="skill-tag">PostgreSQL</span>
       </div>
     </div>
 
@@ -953,13 +877,12 @@ footer {
       <div class="skill-group-title">Embedded & IoT</div>
       <div class="skill-tags">
         <span class="skill-tag">Embedded Systems</span>
-        <span class="skill-tag">IoT Architecture</span>
-        <span class="skill-tag">EV Charging & BMS</span>
+        <span class="skill-tag">IoT Awareness</span>
+        <span class="skill-tag">BMS & Charging Systems</span>
         <span class="skill-tag">Device Integration</span>
         <span class="skill-tag">HW-SW Interaction</span>
         <span class="skill-tag">Fault Analysis</span>
         <span class="skill-tag">System-Level Testing</span>
-        <span class="skill-tag">OTA Updates</span>
       </div>
     </div>
 
@@ -974,17 +897,19 @@ footer {
         <span class="skill-tag">APQP</span>
         <span class="skill-tag">PPAP</span>
         <span class="skill-tag">FMEA</span>
-        <span class="skill-tag">SPC / MSA</span>
+        <span class="skill-tag">SPC</span>
+        <span class="skill-tag">MSA</span>
       </div>
     </div>
 
     <div class="skill-group">
       <div class="skill-group-title">AI & Automation</div>
       <div class="skill-tags">
-        <span class="skill-tag">RPA (UiPath)</span>
+        <span class="skill-tag">RPA (UiPath Academy)</span>
         <span class="skill-tag">Python for ML</span>
         <span class="skill-tag">Deep Learning (NVIDIA)</span>
         <span class="skill-tag">Data-Driven Product</span>
+        <span class="skill-tag">AI Foundational</span>
       </div>
     </div>
   </div>
@@ -995,78 +920,78 @@ footer {
   <div class="section-header">
     <span class="section-num">04</span>
     <h2 class="section-title">Certifications</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
-  <div class="cert-grid">
+  <div class="cert-list">
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Product Ownership & Scrum</div>
-        <div class="cert-org">BTK Academy</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Product Ownership & Scrum</strong>
+        BTK Academy
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Agile Project Management</div>
-        <div class="cert-org">BTK Academy</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Agile Project Management</strong>
+        BTK Academy
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Customer Awareness & Stakeholder Management</div>
-        <div class="cert-org">BTK Academy</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Customer Awareness & Stakeholder Management</strong>
+        BTK Academy
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">RPA Developer Foundation</div>
-        <div class="cert-org">UiPath Academy</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>RPA Developer Foundation</strong>
+        UiPath Academy
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Python for Machine Learning</div>
-        <div class="cert-org">Global AI Hub</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Python for Machine Learning</strong>
+        Global AI Hub
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Deep Learning: Getting Started</div>
-        <div class="cert-org">NVIDIA</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Deep Learning: Getting Started</strong>
+        NVIDIA
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Integrated Management Systems</div>
-        <div class="cert-org">ISO 9001, 14001, 45001 — Bureau Veritas</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Integrated Management Systems</strong>
+        ISO 9001, 14001, 45001 — Bureau Veritas
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">Internal Auditor (ISO 19011)</div>
-        <div class="cert-org">Bureau Veritas</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>Internal Auditor (ISO 19011)</strong>
+        Bureau Veritas
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">IATF 16949:2016 Internal Auditor</div>
-        <div class="cert-org">Quality Compliance</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>IATF 16949:2016 Internal Auditor</strong>
+        Quality Compliance
       </div>
     </div>
     <div class="cert-item">
-      <div class="cert-dash"></div>
-      <div>
-        <div class="cert-name">APQP, PPAP, FMEA, SPC, MSA</div>
-        <div class="cert-org">Quality Partner</div>
+      <div class="cert-dot"></div>
+      <div class="cert-text">
+        <strong>APQP, PPAP, FMEA, SPC, MSA</strong>
+        Quality Partner
       </div>
     </div>
   </div>
@@ -1077,19 +1002,18 @@ footer {
   <div class="section-header">
     <span class="section-num">05</span>
     <h2 class="section-title">Education</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
   <div class="edu-card">
-    <div class="edu-watermark">EEE</div>
     <div>
       <div class="edu-degree">Bachelor of Electrical & Electronics Engineering</div>
       <div class="edu-school">Antalya Bilim University</div>
-      <div class="edu-meta">2018 — 2023 &nbsp;·&nbsp; 100% English Medium &nbsp;·&nbsp; Second Highest Honors</div>
+      <div class="edu-meta">2018 — 2023 &nbsp;·&nbsp; 100% English &nbsp;·&nbsp; Graduated with Second Highest Honors</div>
     </div>
-    <div class="gpa-badge">
-      <span class="gpa-num">3.33</span>
-      <span class="gpa-lbl">GPA / 4.0</span>
+    <div class="edu-badge">
+      <span class="gpa">3.33</span>
+      GPA / 4.0
     </div>
   </div>
 </section>
@@ -1099,7 +1023,7 @@ footer {
   <div class="section-header">
     <span class="section-num">06</span>
     <h2 class="section-title">Languages</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
   <div class="lang-grid">
@@ -1123,34 +1047,33 @@ footer {
   <div class="section-header">
     <span class="section-num">07</span>
     <h2 class="section-title">Contact</h2>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
   </div>
 
-  <div class="contact-wrap">
+  <div class="contact-inner">
     <div>
-      <p class="contact-heading">Let's build<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent);">something together.</em></p>
-      <p class="contact-sub">Open to new Product Owner opportunities, technical collaborations, and challenging product challenges in embedded, IoT, or web domains. Relocation-ready.</p>
+      <p style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text); margin-bottom:0.5rem;">Let's work together.</p>
+      <p style="font-size:0.9rem; color:var(--muted); max-width:400px;">I'm always open to new opportunities, collaborations, and technical projects. Feel free to reach out — I'd love to hear from you.</p>
     </div>
-    <div class="contact-list">
-      <a href="tel:+905079153112" class="contact-link">
-        <span class="contact-link-icon">Tel</span>
+    <div class="contact-info">
+      <a href="tel:+905079153112" class="contact-item">
+        <span class="contact-icon">📞</span>
         +90 507 915 31 12
       </a>
-      <a href="mailto:cagladundar.eee@gmail.com" class="contact-link">
-        <span class="contact-link-icon">Mail</span>
+      <a href="mailto:cagladundar.eee@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
         cagladundar.eee@gmail.com
       </a>
-      <span class="contact-link" style="cursor:default;">
-        <span class="contact-link-icon">Loc</span>
-        Antalya, Türkiye &nbsp;
-        <span style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--pop);letter-spacing:0.06em;">open to relocation</span>
+      <span class="contact-item">
+        <span class="contact-icon">📍</span>
+        Antalya / Türkiye &nbsp;<span style="color:var(--accent);font-size:0.75rem;">(Open to relocation)</span>
       </span>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Çağla Dündar &nbsp;·&nbsp; Technical Product Owner &nbsp;·&nbsp; Embedded & Software
+  © 2026 Çağla Dündar &nbsp;·&nbsp; Technical Product Owner &nbsp;·&nbsp; Embedded & Software Solutions
 </footer>
 
 </body>
